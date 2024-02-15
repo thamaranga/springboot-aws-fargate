@@ -9,7 +9,7 @@ phases:
       - aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 722771351613.dkr.ecr.ap-southeast-1.amazonaws.com
       - # Replace with this to your repository URI
       # REPOSITORY_URI also should retrieved from AWS ECR repository
-      - REPOSITORY_URI=722771351613.dkr.ecr.ap-southeast-1.amazonaws.com/springboot-aws-fargate
+      - REPOSITORY_URI=722771351613.dkr.ecr.ap-southeast-1.amazonaws.com/springboot-demo-ecr
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
