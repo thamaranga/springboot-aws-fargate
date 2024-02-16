@@ -26,11 +26,14 @@ While creating AWS ECS below are few important things.
 1. ECS Task definition - This means important details about our task like image details, port details of the container and volume details etc.
    So basically using task definition we are creating tasks. Which means we can create multiple tasks using a task definition.
    Let's say our task definition is related to springboot image. Then  if we create multiple tasks from that task definition then
-   multiple spring boot docker containers can be run.
+   multiple spring boot docker containers can be run. While creating the service we can mention how many tasks need to run from the task definition file we created.
 2. ECS service - This is responsible for keep  the containers which are created using tasks  24*7 run status.
    Which means if  our spring boot container stop since any reason then ECS service is spin up
    new container  by running a new task. So simply our tasks are managed by ECS service.
 3. Fargate - This is the EC2 instances cluster which is managed by AWS.
 
 This application we can expose to outside through AWS application load balancer.
+
+Need to create an ALB and two security group. One security group for allowing traffic to load balancer from outside. Another one for allowing traffic from load balancer to ECS.
+Then our ECS  need to combine with this ALB.
 
