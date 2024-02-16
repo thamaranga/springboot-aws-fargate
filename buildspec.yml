@@ -8,7 +8,7 @@ phases:
       # below command can just copy from our AWS ECR repository.(Goto AWS ECR repository -> View push commands)
       - aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 722771351613.dkr.ecr.ap-southeast-1.amazonaws.com
       - # Replace with this to your repository URI
-      # REPOSITORY_URI also should retrieved from AWS ECR repository
+      # REPOSITORY_URI also should get from AWS ECR repository
       - REPOSITORY_URI=722771351613.dkr.ecr.ap-southeast-1.amazonaws.com/springboot-demo-ecr
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
@@ -27,6 +27,7 @@ phases:
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
       # Give your container name
+      # Below container name should be similar to our ECS task definition's container name
       - DOCKER_CONTAINER_NAME=aws-springboot-fargate-container
       - printf '[{"name":"%s","imageUri":"%s"}]' $DOCKER_CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - echo $DOCKER_CONTAINER_NAME
